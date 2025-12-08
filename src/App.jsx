@@ -10,7 +10,7 @@ import Login from "./pages/Login/Login";
 import CityList from "./components/CityList/CityList";
 import Form from "./components/Form/Form";
 import CountryList from "./components/CountryList/CountryList";
-import City from "./components/Cities/City";
+import City from "./components/City/City";
 import { CitiesProvider } from "./contexts/CitiesContext";
 
 const App = () => {

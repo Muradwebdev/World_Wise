@@ -1,7 +1,8 @@
 import styles from "./City.module.css";
 
-import { useParams, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
+import { useNavigate, useParams } from "react-router-dom";
 import { useCities } from "../../contexts/CitiesContext";
 
 import Spinner from "../SpinnerLoading/Spinner";
@@ -16,24 +17,22 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  const { isLoading } = useCities();
+  const { isLoading, currentCity, getCity } = useCities();
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
-  
-  const [searchParams, setSearchParams] = useSearchParams();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
-
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "AZ",
-    date: "2027-10-31t15",
-    notes: "Myfavorite city so far!",
-  };
 
   const { cityName, emoji, date, notes } = currentCity;
 
+  useEffect(
+    function () {
+      getCity(id);
+    },
+    [id]
+  );
   if (isLoading) return <Spinner />;
+
   return (
     <div className={styles.city}>
       <div className={styles.row}>
@@ -67,7 +66,14 @@ function City() {
       </div>
 
       <div>
-        <BackButton />
+        <BackButton
+          onclick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+          }}
+        >
+          &larr; Back
+        </BackButton>
       </div>
     </div>
   );
