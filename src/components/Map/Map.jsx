@@ -1,6 +1,5 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "../Map/Map.module.css";
-import React, { useState } from "react";
 function Map() {
   const navigate = useNavigate();
 

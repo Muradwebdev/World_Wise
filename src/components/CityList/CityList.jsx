@@ -1,9 +1,11 @@
 import styles from "./CityList.module.css";
+
+import { CitiesContexts } from "../../contexts/CitiesContext";
+import { useContext } from "react";
+
 import Message from "../Message/Message";
 import CityItem from "../CityItem/CityItem";
 import Spinner from "../SpinnerLoading/Spinner";
-import { useContext } from "react";
-import { CitiesContexts } from "../../contexts/CitiesContext";
 
 function CityList() {
   const { cities, isLoading } = useContext(CitiesContexts);

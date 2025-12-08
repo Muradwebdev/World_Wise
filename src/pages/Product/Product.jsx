@@ -1,5 +1,4 @@
 import styles from "./Product.module.css";
-import React from "react";
 import img1 from "../../../public/img/img-1.jpg";
 import PageNav from "../../components/PageNav/PageNav";
 export default function Product() {

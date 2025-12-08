@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Logo.module.css";
 import logo from "../../../public/img/logo.png";
-import React from "react";
+
 function Logo() {
   return (
     <Link to="/">

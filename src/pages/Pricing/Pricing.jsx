@@ -1,6 +1,4 @@
-// Uses the same styles as Product
 import styles from "../Product/Product.module.css";
-import React from "react";
 import img2 from "../../../public/img/img-2.jpg";
 import PageNav from "../../components/PageNav/PageNav";
 export default function Pricing() {
