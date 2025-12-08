@@ -2,12 +2,15 @@ import styles from "./CityList.module.css";
 import Message from "../Message/Message";
 import CityItem from "../CityItem/CityItem";
 import Spinner from "../SpinnerLoading/Spinner";
-import React from "react";
+import { useContext } from "react";
+import { CitiesContexts } from "../../contexts/CitiesContext";
 
-function CityList({ cities=[], isLoading }) {
+function CityList() {
+  const { cities, isLoading } = useContext(CitiesContexts);
+
   if (isLoading) return <Spinner />;
 
-  if (!cities.length)
+  if (cities && !cities.length)
     return (
       <Message message="Add your first city by clicking on a city on the map" />
     );

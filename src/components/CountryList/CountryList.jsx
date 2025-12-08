@@ -2,9 +2,12 @@ import styles from "./CountryList.module.css";
 import Message from "../Message/Message";
 import Spinner from "../SpinnerLoading/Spinner";
 import CountryItem from "../CountryItem/CountryItem";
-import React from "react";
+import { useContext } from "react";
+import { CitiesContexts } from "../../contexts/CitiesContext";
 
-function CountryList({ cities, isLoading }) {
+function CountryList() {
+  const { cities, isLoading } = useContext(CitiesContexts);
+
   if (isLoading) return <Spinner />;
 
   if (!cities)
@@ -17,7 +20,6 @@ function CountryList({ cities, isLoading }) {
       return [...arr, { country: city.country, emoji: city.emoji }];
     else return arr;
   }, []);
-  
 
   return (
     <ul className={styles.countryList}>
