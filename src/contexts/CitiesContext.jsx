@@ -1,9 +1,9 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { useState, useEffect } from "react";
 
-const CitiesContexts = createContext();
-
 const BASE_URL = "http://localhost:5000";
+
+const CitiesContexts = createContext();
 
 const CitiesProvider = ({ children }) => {
   const [cities, setCities] = useState([]);
@@ -31,4 +31,13 @@ const CitiesProvider = ({ children }) => {
   );
 };
 
-export { CitiesContexts, CitiesProvider };
+const useCities = () => {
+  const context = useContext(CitiesContexts);
+
+  if (context === undefined) {
+    throw new Error("Cities yoxdur !!!");
+  }
+  return context;
+};
+
+export { useCities, CitiesProvider };

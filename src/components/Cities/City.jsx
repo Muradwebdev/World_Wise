@@ -2,8 +2,7 @@ import styles from "./City.module.css";
 
 import { useParams, useSearchParams } from "react-router-dom";
 
-import { useContext } from "react";
-import { CitiesContexts } from "../../contexts/CitiesContext";
+import { useCities } from "../../contexts/CitiesContext";
 
 import Spinner from "../SpinnerLoading/Spinner";
 import BackButton from "../Buttons/BackButton";
@@ -17,9 +16,10 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  const { isLoading } = useContext(CitiesContexts);
+  const { isLoading } = useCities();
 
   const { id } = useParams();
+  
   const [searchParams, setSearchParams] = useSearchParams();
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
