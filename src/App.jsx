@@ -12,8 +12,25 @@ import Form from "./components/Form/Form";
 import CountryList from "./components/CountryList/CountryList";
 import City from "./components/City/City";
 import { CitiesProvider } from "./contexts/CitiesContext";
+import { useEffect } from "react";
 
 const App = () => {
+  //SupaBase yadinda olsun deploy etmek ucun bunu edersen
+
+  //   useEffect(() => {
+  //   fetch("https://cibvyhzxafjzktykufrv.supabase.co/rest/v1/cities", {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: "Bearer sb_publishable_ZmCsOj2U8DJF7Xrzxdygvw_5XSQX7RR",
+  //       "Content-Type": "application/json",
+  //       apikey: "sb_publishable_ZmCsOj2U8DJF7Xrzxdygvw_5XSQX7RR", // bəzən apikey də lazım olur
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data))
+  //     .catch((error) => console.error("Error:", error));
+  // }, []);
+
   return (
     <CitiesProvider>
       <BrowserRouter>
