@@ -1,3 +1,28 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "id": "d6a5",
+      "cityName": "Marand",
+      "country": "Iran (Islamic Republic of)",
+      "emoji": "🇮🇷",
+      "date": "",
+      "notes": "",
+      "position": {
+        "lat": "38.46658304785455",
+        "lng": "45.83496093750001"
+      }
+    },
+    {
+      "id": "9752",
+      "cityName": "Patnos",
+      "country": "Turkiye",
+      "emoji": "🇹🇷",
+      "date": "",
+      "notes": "",
+      "position": {
+        "lat": "39.269193026379995",
+        "lng": "42.86865234375"
+      }
+    }
+  ]
 }

@@ -72,6 +72,7 @@ function Form() {
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
+
     const newCity = {
       cityName,
       country: countryName,
@@ -80,6 +81,7 @@ function Form() {
       notes,
       position: { lat, lng },
     };
+
     await createCityAddApi(newCity);
     navigate("/app/cities ");
   };
