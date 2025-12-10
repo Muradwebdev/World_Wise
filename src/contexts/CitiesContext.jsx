@@ -10,6 +10,8 @@ const CitiesProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentCity, setCurrencyCity] = useState({});
 
+  console.log(cities);
+
   useEffect(() => {
     async function fetchCities() {
       setIsLoading(true);
@@ -39,9 +41,52 @@ const CitiesProvider = ({ children }) => {
     }
   }
 
+  async function createCityAddApi(newCity) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/cities`, {
+        method: "POST",
+        body: JSON.stringify(newCity),
+        headers: {
+          "Content-Type": "aplication/json",
+        },
+      });
+
+      const data = await res.json();
+      setCities((prew) => [...prew, data]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const deleteCity = async (id) => {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/cities/${id}`, { method: "DELETE" });
+      const data = await res.json();
+
+      const filter = cities.filter((city) => city.id !== data.id);
+
+      setCities(filter);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <CitiesContexts.Provider
-      value={{ cities, isLoading, currentCity, getCity }}
+      value={{
+        cities,
+        isLoading,
+        currentCity,
+        getCity,
+        createCityAddApi,
+        deleteCity,
+      }}
     >
       {children}
     </CitiesContexts.Provider>

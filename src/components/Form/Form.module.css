@@ -7,6 +7,11 @@
   flex-direction: column;
   gap: 2rem;
 }
+.flag {
+  font-size: 2rem; /* istədiyin ölçü */
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji",
+    sans-serif;
+}
 
 .row {
   display: flex;
@@ -23,8 +28,10 @@
 .flag {
   position: absolute;
   right: 1rem;
-  top: 2.7rem;
-  font-size: 2.8rem;
+  top: 2.3rem;
+  font-size: 2.9rem;
+  color: #000;
+
 }
 
 .form.loading {
