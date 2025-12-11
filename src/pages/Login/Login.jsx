@@ -1,3 +1,4 @@
+import Button from "../../components/Buttons/Button";
 import styles from "./Login.module.css";
 import { useState } from "react";
 export default function Login() {
@@ -29,9 +30,9 @@ export default function Login() {
         </div>
 
         <div>
-          <button className={styles.btn} type="primary">
+          <Button className={styles.btn} type="primary">
             Login
-          </button>
+          </Button>
         </div>
       </form>
     </main>

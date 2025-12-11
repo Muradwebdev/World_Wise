@@ -16,6 +16,7 @@ import BackButton from "../Buttons/BackButton";
 import Message from "../Message/Message";
 
 import { useCities } from "../../contexts/CitiesContext";
+import { useAuth } from "../../contexts/FakeAuthContext";
 
 const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
 
@@ -30,10 +31,14 @@ export function convertToEmoji(countryCode) {
 function Form() {
   const navigate = useNavigate();
 
+  //context
   const { createCityAddApi, isLoading } = useCities();
 
+  
+  //Custom hook
   const [lat, lng] = useURLPosition();
 
+  //My state
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
 
   const [cityName, setCityName] = useState();
