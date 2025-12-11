@@ -1,3 +1,16 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "id": "e89e",
+      "cityName": "Susuz",
+      "country": "Turkiye",
+      "emoji": "🇹🇷",
+      "date": "",
+      "notes": "",
+      "position": {
+        "lat": "40.69875081500832",
+        "lng": "43.24218750000001"
+      }
+    }
+  ]
 }
