@@ -58,17 +58,22 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {cities.map((city) => (
-          <Marker
-            position={[city.position.lat, city.position.lng]}
-            key={city.id}
-          >
-            <Popup>
-              <span>{city.emoji}</span>
-              <span>{city.cityName}</span>
-            </Popup>
-          </Marker>
-        ))}
+        // Map.jsx dosyanızı şu şekilde güncelleyin:
+        {cities.map(
+          (city) =>
+            city.position?.lat &&
+            city.position?.lng && (
+              <Marker
+                position={[city.position.lat, city.position.lng]}
+                key={city.id}
+              >
+                <Popup>
+                  <span>{city.emoji}</span>
+                  <span>{city.cityName}</span>
+                </Popup>
+              </Marker>
+            )
+        )}
         <ChangeCenter position={mapPosition} />
         <DetectClick />
       </MapContainer>

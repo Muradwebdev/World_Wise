@@ -34,14 +34,13 @@ function Form() {
   //context
   const { createCityAddApi, isLoading } = useCities();
 
-  
   //Custom hook
   const [lat, lng] = useURLPosition();
 
   //My state
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
 
-  const [cityName, setCityName] = useState();
+  const [cityName, setCityName] = useState("");
 
   const [countryName, setCountryName] = useState("");
 
@@ -78,11 +77,16 @@ function Form() {
   const handlerSubmit = async (e) => {
     e.preventDefault();
 
+    if (!cityName || !date) {
+      alert("Bos xanalari doldurun !!!");
+      return;
+    }
+
     const newCity = {
       cityName,
       country: countryName,
       emoji,
-      date,
+      date: date ? date.toISOString() : null,
       notes,
       position: { lat, lng },
     };

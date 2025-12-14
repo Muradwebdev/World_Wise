@@ -1,7 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
 import { useEffect } from "react";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://fgouvennngidagsjyvfh.supabase.co";
+const API_KEY = "sb_publishable_S_KxayLuGkCpEDWuSxq9Uw_RxYKN7fe";
 
 const CitiesContexts = createContext();
 
@@ -31,7 +32,7 @@ const reducer = (state, action) => {
     case "city/created":
       return {
         ...state,
-        cities: [...state.cities, action.payload],
+        cities: [action.payload, ...state.cities],
       };
 
     //....................................................
@@ -59,12 +60,21 @@ const CitiesProvider = ({ children }) => {
     reducer,
     initialState
   );
+
   useEffect(() => {
     async function fetchCities() {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL}/cities`);
+        const res = await fetch(`${BASE_URL}/rest/v1/cities`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${API_KEY}`,
+            "Content-Type": "application/json",
+            apikey: `${API_KEY}`,
+          },
+        });
         const data = await res.json();
+        console.log("cities", data);
         dispatch({ type: "loaded/cities", payload: data });
       } catch (error) {
         console.log(error);
@@ -78,8 +88,16 @@ const CitiesProvider = ({ children }) => {
   async function getCity(id) {
     try {
       dispatch({ type: "loading" });
-      const res = await fetch(`${BASE_URL}/cities/${id}`);
+      const res = await fetch(`${BASE_URL}/rest/v1/cities?id=eq.${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+          apikey: `${API_KEY}`,
+        },
+      });
       const data = await res.json();
+      console.log("id ye uygun", data);
       dispatch({ type: "loaded/city", payload: data });
     } catch (error) {
       console.log(error);
@@ -91,17 +109,24 @@ const CitiesProvider = ({ children }) => {
   async function createCityAddApi(newCity) {
     try {
       dispatch({ type: "loading" });
-      const res = await fetch(`${BASE_URL}/cities`, {
+      const res = await fetch(`${BASE_URL}/rest/v1/cities`, {
         method: "POST",
         body: JSON.stringify(newCity),
         headers: {
           "Content-Type": "application/json",
+          apikey: API_KEY,
+          Authorization: `Bearer ${API_KEY}`,
+          Prefer: "return=representation",
         },
       });
 
       const data = await res.json();
+      console.log("yuklenen data create", data);
 
-      dispatch({ type: "city/created", payload: data });
+      const newCityData =
+        Array.isArray(data) && data.length > 0 ? data[0] : data;
+
+      dispatch({ type: "city/created", payload: newCityData });
     } catch (error) {
       console.log(error);
     } finally {
@@ -112,14 +137,19 @@ const CitiesProvider = ({ children }) => {
   const deleteCity = async (id) => {
     try {
       dispatch({ type: "loading" });
-      const res = await fetch(`${BASE_URL}/cities/${id}`, { method: "DELETE" });
-      const data = await res.json();
+      const res = await fetch(`${BASE_URL}/rest/v1/cities?id=eq.${id}`, {
+        method: "DELETE",
+        headers: {
+          apikey: API_KEY,
+          Authorization: `Bearer ${API_KEY}`,
+        },
+      });
 
-      const filter = cities.filter((city) => city.id !== data.id);
+      const filter = cities.filter((city) => city.id !== id);
 
       dispatch({ type: "city/deleted", payload: filter });
     } catch (error) {
-      console.log(error);
+      console.log("Şehir silinirken hata oluştu:", error);
     } finally {
       dispatch({ type: "finally" });
     }
