@@ -1,5 +1,5 @@
-import "./leafletIconFix";
-  
+import "./VercelIconHelp/leafletIconFix.js";
+
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import React from "react";
