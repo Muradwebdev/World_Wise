@@ -13,7 +13,8 @@ export default function Login() {
   const { login, isAuthenticated } = useAuth();
 
   function handlerSubmit(e) {
-    if (!email && !password) return alert("salam");
+    if (!email && !password)
+      return alert("Numune verilen e-mail ve password -u daxil edin.");
     e.preventDefault();
     login(email, password);
     setEmail("");
