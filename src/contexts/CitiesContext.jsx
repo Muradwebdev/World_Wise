@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useCallback, useContext, useReducer } from "react";
 import { useEffect } from "react";
 
 const BASE_URL = "https://fgouvennngidagsjyvfh.supabase.co";
@@ -85,7 +85,7 @@ const CitiesProvider = ({ children }) => {
     fetchCities();
   }, []);
 
-  async function getCity(id) {
+  const getCity = useCallback(async function getCity(id) {
     try {
       dispatch({ type: "loading" });
       const res = await fetch(`${BASE_URL}/rest/v1/cities?id=eq.${id}`, {
@@ -104,7 +104,7 @@ const CitiesProvider = ({ children }) => {
     } finally {
       dispatch({ type: "finally" });
     }
-  }
+  }, []);
 
   async function createCityAddApi(newCity) {
     try {
